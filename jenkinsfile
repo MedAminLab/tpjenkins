@@ -1,0 +1,47 @@
+pipeline{
+	agent none
+
+	Stages {
+
+		stage ('Compile'){
+			agent { docker 'maven:3-alpine' }
+			steps{
+
+				
+
+					sh 'mvn -B -DskipTests clean package
+
+				
+			}
+
+		}
+
+		stage ('Testing'){
+			agent { docker 'maven:3-alpine' }
+			steps{
+
+				
+
+					sh 'mvn test'
+
+				
+			}
+
+		}
+
+		stage ('Delivery'){
+			agent { docker 'maven:3-alpine' }
+			steps{
+
+				
+
+					sh './jenkins/scripts/deliver.sh'
+
+				
+			}
+
+		}
+
+	}
+
+}
